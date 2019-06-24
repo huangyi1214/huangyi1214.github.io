@@ -5,21 +5,21 @@
   
 
   
-  <title>Hexo</title>
+  <title>node.js高并发高可用架构设计实战</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="参照pomelo的框架设计思想，使用egg框架做为node.js代码框架构建高并发，高可用秒杀系统">
 <meta name="keywords" content="egg,pomelo,即时通讯">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="node.js高并发高可用架构设计实战">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="node.js高并发高可用架构设计实战">
 <meta property="og:description" content="参照pomelo的框架设计思想，使用egg框架做为node.js代码框架构建高并发，高可用秒杀系统">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="node.js高并发高可用架构设计实战">
 <meta name="twitter:description" content="参照pomelo的框架设计思想，使用egg框架做为node.js代码框架构建高并发，高可用秒杀系统">
   
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="node.js高并发高可用架构设计实战" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -38,7 +38,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
+        <a href="/" id="logo">node.js高并发高可用架构设计实战</a>
       </h1>
       
         <h2 id="subtitle-wrap">
@@ -70,9 +70,9 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-egg-shop" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-egg-HA" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/06/24/egg-shop/" class="article-date">
+    <a href="/2019/06/24/egg-HA/" class="article-date">
   <time datetime="2019-06-24T02:44:12.000Z" itemprop="datePublished">2019-06-24</time>
 </a>
     
@@ -84,7 +84,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/24/egg-shop/">高并发系统架构node.js实现</a>
+      <a class="article-title" href="/2019/06/24/egg-HA/">高并发系统架构node.js实现</a>
     </h1>
   
 
@@ -92,10 +92,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>项目目的：<br>在平时开发中，我们也许会经常碰到这些问题：<br>1，新人加入时会需要花大量的时间去熟悉代码，因没有完全掌握代码，随便改动了一个功能模块就会影响其他功能的使用<br>2，代码分层不清晰，耦合在一起，改动非常被动<br>3，代码测试不到位，导致上线后因漏洞造成损失，不停的修改=&gt;测试=&gt;发布=&gt;线上出现问题打回=&gt;修改=&gt;测试=&gt;发布，形成了一个死循环，<br>4，版本更新需要发邮件,停服更新，更新繁琐，</p>
-<p>基于以上几点，给大家分享一个结合自己工作中遇见的种种问题的解决方案，秒杀系统解决方案，有三套代码，分别是：<br>1，后台程序代码<br>2，压测框架<br>3，后台管理系统</p>
+        <p>项目目的：<br>在平时开发中，我们也许会经常碰到这些问题：<br>1，新人加入时会需要花大量的时间去熟悉代码，因没有完全掌握代码，随便改动了一个功能模块就会影响其他功能的使用<br>2，代码分层不清晰，耦合在一起，改动非常被动<br>3，代码测试不到位，导致上线后因漏洞造成损失，不停的修改=&gt;测试=&gt;发布=&gt;线上出现问题打回=&gt;修改=&gt;测试=&gt;发布，形成了一个死循环，<br>4，版本更新需要发邮件,停服更新，更新繁琐，<br>5，因无法模拟大并发的用户测试，很多隐藏的问题得不到及时发现</p>
+<p>基于以上几点，给大家分享一个结合自己工作中遇见的种种问题的解决方案，秒杀系统解决方案，有三套代码，分别是：<br>1，后台程序代码:<a href="https://github.com/huangyi1214/egg-shop.git" target="_blank" rel="noopener">https://github.com/huangyi1214/egg-shop.git</a><br>2，压测框架：<a href="https://gitee.com/huangyi1214/client.git" target="_blank" rel="noopener">https://gitee.com/huangyi1214/client.git</a><br>3，后台管理系统：<a href="https://github.com/huangyi1214/eggShop-admin.git" target="_blank" rel="noopener">https://github.com/huangyi1214/eggShop-admin.git</a></p>
 <p>使用到的技术栈：node.js+mysql+redis+redis分布式事物锁+rpc+消息队列</p>
-<p>秒杀在现代互联网开发当中非常常见，我的这个例子就是简单的几个模块用于演示，当然后期我会继续完善，<br>1，登录功能<br>2，创建一个秒杀<br>3，创建完成后，立即通知所有的在线用户进行抢购<br>4，有一个后台管理系统，可以生成订单，查询该订单被抢购的详情</p>
+<p>秒杀在现代互联网开发当中非常常见，我的这个例子就是简单的几个模块用于演示，当然后期我会继续完善，<br>1，登录功能<br>2，创建一个秒杀订单<br>3，创建完成后，立即通知所有的在线用户进行抢购<br>4，有一个后台管理系统，可以生成订单，查询该订单被抢购的详情</p>
+<p>项目架构图<br><img src="/2019/06/24/egg-HA/1.jpg" alt="1"></p>
 <p>一，框架选型，我用express框架用了好几年了，但是给我最深的感觉就是框架太基础了，还记得我要开发一个socket.io的服务，我需要手动去创建，维护，代码规范用ESlint，文件夹每个项目定义都是五花八门，<br>后来我选择了egg，给我的体验实在是太棒了，地址：<a href="https://eggjs.org/zh-cn/" target="_blank" rel="noopener">https://eggjs.org/zh-cn/</a></p>
 <p>1，egg奉行约束优先，没个文件夹的功能定义都非常清晰，<br>2，内置多进程管理，我们可以不用pm2这样的框架进行线上部署了，关于node,js的多进程使用，我后面还会有一篇文章进行讲解，我自己写了一套压力测试框架，在github上开源<br>3，高度可扩展的插件机制，可插拔，社区比较大，有很多现成开源的插件，一个新的项目只需加载一下自己需要的插件就可以开始写业务逻辑了 </p>
 <p>二，egg优势<br>1，整个程序对外只提供一个接口（http,socket.io共用），也许到这里大家可能会问这怎么可能，http和socket.io绑定不是一个端口号啊，这就是他的优势，其实底层的实现逻辑是利用了node.js的Cluster模块来启动多线程,关于底层实现，推荐大家参考这篇文章，地址：<a href="https://cnodejs.org/topic/56e84480833b7c8a0492e20c，另外知乎上一篇文章详细说明了egg多进程实现原理：https://zhuanlan.zhihu.com/p/62892856" target="_blank" rel="noopener">https://cnodejs.org/topic/56e84480833b7c8a0492e20c，另外知乎上一篇文章详细说明了egg多进程实现原理：https://zhuanlan.zhihu.com/p/62892856</a></p>
@@ -109,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/24/egg-shop/" data-id="cjx9s26xp00009c0fs69vjpcy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/24/egg-HA/" data-id="cjxagojhv0000vn0ftcoag12a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/高并发秒杀系统node实现/">高并发秒杀系统node实现</a></li></ul>
@@ -166,7 +167,7 @@
       <ul>
         
           <li>
-            <a href="/2019/06/24/egg-shop/">高并发系统架构node.js实现</a>
+            <a href="/2019/06/24/egg-HA/">高并发系统架构node.js实现</a>
           </li>
         
       </ul>
