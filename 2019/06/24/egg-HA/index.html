@@ -16,7 +16,8 @@
 <meta property="og:description" content="项目目的：在平时开发中，我们也许会经常碰到这些问题：1，新人加入时会需要花大量的时间去熟悉代码，因没有完全掌握代码，随便改动了一个功能模块就会影响其他功能的使用2，代码分层不清晰，耦合在一起，改动非常被动3，代码测试不到位，导致上线后因漏洞造成损失，不停的修改=&amp;gt;测试=&amp;gt;发布=&amp;gt;线上出现问题打回=&amp;gt;修改=&amp;gt;测试=&amp;gt;发布，形成了一个死循环，4，版本更新需要发邮件,">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2019/06/24/egg-HA/1.jpg">
-<meta property="og:updated_time" content="2019-06-24T14:02:29.652Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/24/egg-HA/2.jpeg">
+<meta property="og:updated_time" content="2019-06-25T00:44:45.998Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="高并发系统架构node.js实现">
 <meta name="twitter:description" content="项目目的：在平时开发中，我们也许会经常碰到这些问题：1，新人加入时会需要花大量的时间去熟悉代码，因没有完全掌握代码，随便改动了一个功能模块就会影响其他功能的使用2，代码分层不清晰，耦合在一起，改动非常被动3，代码测试不到位，导致上线后因漏洞造成损失，不停的修改=&amp;gt;测试=&amp;gt;发布=&amp;gt;线上出现问题打回=&amp;gt;修改=&amp;gt;测试=&amp;gt;发布，形成了一个死循环，4，版本更新需要发邮件,">
@@ -107,6 +108,7 @@
 <p>2，订单生成，需要同时在redis和mysql中生成新的记录，<br>3，抢购，先查redis，如果数量足够，使用redlock分布式事务锁，然后再更新数据库，如果不用redlock,直接使用mysql事务，会出现多个事务同时锁定，造成死锁，在订单已经被全部抢购完以后，其他的连接请求全部都是读取redis缓存的记录，不会对数据库造成压力</p>
 <p>五，微服务的好处及实现<br>微服务可以将我们庞大的service服务进行切割，分成多个功能完全独立的子系统，易于维护，再也不用担心，只修改一个功能代码就需要把整个系统更新一遍，而且更新的时候，别人有可能在开发新的业务功能，如果更新上去，很容易出错，另外一个好处就可以进行版本管理，当需要更新时，先把服务部署好，创建一个新的版本，然后RPC调用时自动切换到新的版本，无需把用户提出下线<br>实现流程是，先实现功能service，然后向zookeeper进行注册服务发现，提供客户端调用，egg的RPC实现流程可参考<a href="https://www.yuque.com/egg/nodejs/vlmums" target="_blank" rel="noopener">https://www.yuque.com/egg/nodejs/vlmums</a></p>
 <p>五，压测工具的使用，我的压力测试工具已经使用node.js的cluster模块实现高并发压测<br>使用方式：node index.js “<a href="http://ip:port&quot;" target="_blank" rel="noopener">http://ip:port&quot;</a> -c5000 -n5 -u13800000000<br>-c 单个线程跑的用户数量<br>-n 需要跑的线程数量</p>
+<p>欢迎加我微信大家一起交流技术<br><img src="/2019/06/24/egg-HA/2.jpeg" alt="1"></p>
 
       
     </div>
